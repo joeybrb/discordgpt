@@ -1,0 +1,36 @@
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim-buster
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Copy the requirements.txt file into the container at /app
+COPY requirements.txt /app
+
+# Install any required packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container at /app
+COPY. /app
+
+# Set environment variables required by the application
+ENV DISCORD_BOT_TOKEN=your_discord_bot_token
+ENV LLM=your_llm_model
+ENV LLM_SETTINGS=your_llm_settings
+ENV ALLOWED_CHANNEL_TYPES=your_allowed_channel_types
+ENV ALLOWED_CHANNEL_IDS=your_allowed_channel_ids
+ENV ALLOWED_ROLE_IDS=your_allowed_role_ids
+ENV MAX_IMAGES=your_max_images
+ENV MAX_MESSAGES=your_max_messages
+ENV EMBED_COLOR_INCOMPLETE=your_embed_color_incomplete
+ENV EMBED_COLOR_COMPLETE=your_embed_color_complete
+ENV EMBED_MAX_LENGTH=your_embed_max_length
+ENV EDIT_DELAY_SECONDS=your_edit_delay_seconds
+ENV MAX_MESSAGE_NODES=your_max_message_nodes
+ENV DISCORD_CLIENT_ID=your_discord_client_id
+ENV DISCORD_STATUS_MESSAGE=your_discord_status_message
+ENV LLM_SYSTEM_PROMPT=your_llm_system_prompt
+
+# Run the application when the container launches
+CMD ["python", "discord.py"]
+
